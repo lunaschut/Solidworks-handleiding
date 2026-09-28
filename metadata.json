@@ -1,0 +1,7 @@
+{
+  "name": "SolidWorks Schets Analyzer",
+  "description": "Analyseer handgetekende technische schetsen naar 2D-vormen, 3D-intenties en SolidWorks CAD-features met gestructureerde JSON-output en stap-voor-stap modelleerhandleiding voor beginners.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
