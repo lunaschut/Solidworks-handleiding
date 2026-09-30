@@ -23,15 +23,21 @@ import { findSolidWorksTool, SolidWorksToolInfo } from '../utils/solidworksTools
 interface GuideViewerProps {
   guideMarkdown: string;
   onRegenerate: (notes: string) => void;
+  onSaveGuide?: () => void;
   isLoading: boolean;
   partTitle?: string;
+  isSaved?: boolean;
+  showSaveButton?: boolean;
 }
 
 export const GuideViewer: React.FC<GuideViewerProps> = ({
   guideMarkdown,
   onRegenerate,
+  onSaveGuide,
   isLoading,
   partTitle = 'SolidWorks Model',
+  isSaved = false,
+  showSaveButton = true,
 }) => {
   const [copied, setCopied] = useState(false);
   const [extraNotes, setExtraNotes] = useState('');
@@ -119,6 +125,21 @@ export const GuideViewer: React.FC<GuideViewerProps> = ({
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
+          {showSaveButton && (
+            <button
+              onClick={onSaveGuide}
+              disabled={!onSaveGuide || isSaved}
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-colors cursor-pointer ${
+                isSaved
+                  ? 'bg-emerald-100 text-emerald-700 border border-emerald-200 cursor-default'
+                  : 'bg-red-600 hover:bg-red-700 text-white'
+              }`}
+            >
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              <span>{isSaved ? 'Opgeslagen' : 'Handleiding opslaan'}</span>
+            </button>
+          )}
+
           <button
             onClick={handleCopy}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 transition-colors cursor-pointer"

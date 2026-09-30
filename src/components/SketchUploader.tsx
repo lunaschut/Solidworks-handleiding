@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { UploadCloud, PenTool, Image as ImageIcon, Sparkles, X, CheckCircle2, ChevronRight, FileCode } from 'lucide-react';
+import { UploadCloud, PenTool, Image as ImageIcon, Sparkles, X, CheckCircle2, ChevronRight, FileCode, HelpCircle } from 'lucide-react';
 import { PRESET_SKETCHES } from '../data/presets';
 import { PresetSketch } from '../types';
 
@@ -10,6 +10,7 @@ interface SketchUploaderProps {
   isLoading: boolean;
   onOpenSketchPad: () => void;
   onOpenPasteJson: () => void;
+  onOpenGuide: () => void;
 }
 
 export const SketchUploader: React.FC<SketchUploaderProps> = ({
@@ -19,6 +20,7 @@ export const SketchUploader: React.FC<SketchUploaderProps> = ({
   isLoading,
   onOpenSketchPad,
   onOpenPasteJson,
+  onOpenGuide,
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [additionalNotes, setAdditionalNotes] = useState('');
@@ -154,6 +156,18 @@ export const SketchUploader: React.FC<SketchUploaderProps> = ({
               >
                 <FileCode className="w-3.5 h-3.5 text-red-600" />
                 Plak Analyse-JSON
+              </button>
+
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenGuide();
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 transition-colors shadow-2xs"
+              >
+                <HelpCircle className="w-3.5 h-3.5 text-slate-500" />
+                CAD Instructies
               </button>
             </div>
 
